@@ -1,9 +1,9 @@
-# Filename: Dockerfile 
-FROM node:10-alpine
+FROM node:dubnium
+ENV API_PORT=3000 API_HOST=localhost API_PROTOCOL=http
 WORKDIR /app
 COPY package*.json ./
-ENV 
-RUN yarn add @nestjs/core@latest && yarn build && yarn install --production && yarn cache clean
+COPY angular.json ./
 COPY . .
-EXPOSE 3000
-CMD ["yarn", "run", "start"]
+RUN yarn install && yarn build
+EXPOSE 4200
+CMD ["yarn", "start"]
